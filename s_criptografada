@@ -1,0 +1,18 @@
+import hashlib
+import os
+
+def criptografar_senha_sha256(senha):
+
+  salt = os.urandom(16)
+
+  salted_password = senha.encode('utf-8') + salt
+
+  hash_object = hashlib.sha256(salted_password)
+  hex_digest = hash_object.hexdigest()
+
+  return hex_digest + salt.hex()
+
+if __name__== "__main__":
+  senha = input("Digite sua senha: ")
+  senha_criptografada = criptografar_senha_sha256(senha)
+  print("Senha criptografada:", senha_criptografada)
